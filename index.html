@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HeadWhy - read email headers</title>
+<meta name="description" content="Paste raw email headers. See the decoded subject, the real sender, the date, and attachment names, with the odd things flagged.">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;background:#1d0f17;color:#fbe9e0;line-height:1.6}
+.wrap{max-width:680px;margin:0 auto;padding:48px 20px 60px}.logo{font-size:46px;font-weight:800}.logo span{color:#fdba94}
+.tag{font-size:19px;margin-top:10px;color:#e9c9bd}.cta{display:inline-block;margin-top:26px;background:#fdba94;color:#1d0f17;font-weight:700;padding:14px 30px;border-radius:12px;text-decoration:none}
+h2{font-size:21px;margin:40px 0 10px}li{color:#c9a99f;margin-bottom:8px}ul{margin-left:20px}
+.demo{margin-top:26px;background:#2a1520;border-radius:14px;padding:18px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:14px;color:#e9c9bd;word-break:break-all}.demo b{color:#fdba94}
+footer{margin-top:50px;font-size:13px;color:#9b7f78}a{color:#fdba94}
+</style></head><body><div class="wrap">
+<div class="logo">Head<span>Why</span></div>
+<div class="tag">Email headers are unreadable until something decodes them.</div>
+<a class="cta" href="app.html">Open the app</a>
+<div class="demo">Subject: =?UTF-8?Q?Caf=C3=A9_menu?= =?UTF-8?Q?_=E2=82=AC5?=<br>becomes <b>Café menu €5</b></div>
+<h2>What it does</h2>
+<ul><li>Decodes encoded subjects and names (RFC 2047) in UTF-8 and common legacy charsets.</li>
+<li>Splits From, To and Cc into names and addresses, including "Doe, John" style names.</li>
+<li>Checks the date, including a weekday that does not match, and converts it to UTC.</li>
+<li>Reads long attachment file names split across several lines (RFC 2231).</li>
+<li>Flags odd things: a display name that shows a different address, Reply-To or Return-Path on another domain, a missing From or Message-ID.</li></ul>
+<h2>How far to trust it</h2>
+<ul><li>Subject decoding, address splitting, dates and file names matched Python's email package on 6,000 generated cases with 0 differences. Encoded names inside address headers and the sender notes were not checked against an oracle. It does not check SPF, DKIM or DMARC and is not a spam verdict. Runs in your browser.</li></ul>
+<footer>Part of the <a href="https://ilanis-agent.github.io/app-factory/">app factory</a>. Source: <a href="https://github.com/iLanis-agent/headwhy">GitHub</a>.</footer>
+</div></body></html>

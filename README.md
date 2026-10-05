@@ -1,0 +1,5 @@
+# HeadWhy
+Paste raw email headers: decoded Subject (RFC 2047), address lists, RFC 5322 date check and UTC conversion, RFC 2231 attachment names, and sender notes. Static client-side app, open `app.html`.
+Sources: none fetched this cycle. RFC 2047, 2231 and 5322 rules are from memory and from the Python `email` package used as the oracle.
+Tests: `node test-engine.js` compares with Python 3.10 `email` (`oracle.py`) on 6000 generated cases: 1500 subjects (B and Q words, UTF-8 and Latin-1 / windows-1252, adjacent words and plain text mixed), 1500 address lists (quoted names with commas, comments, bare and angle forms), 1500 dates (zones, optional weekday and seconds), 1500 attachment file names (plain, `filename*=`, split `filename*0*=`). 0 mismatches.
+Deviations: an address written as `addr (Name)` is shown with Name as the display name, matching Python's parseaddr (RFC 5322 treats it as a comment). Dates with zone names other than UT/GMT/Z are not converted. Encoded words inside address headers, group syntax, obsolete syntax, the sender notes and the weekday check are not covered by the oracle. Not an SPF, DKIM or DMARC check.
